@@ -24,3 +24,7 @@ def carregar_dados():
         return pd.DataFrame(columns=COLUNAS)
 
 # -------------------------------------------------------------------
+
+def salvar_dados(df):
+    """Salva o dataframe no arquivo CSV."""
+    df.to_csv(ARQUIVO, index=False)
