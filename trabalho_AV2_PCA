@@ -1,0 +1,10 @@
+import pandas as pd
+import os
+
+# Nome do arquivo onde os dados serão armazenados
+ARQUIVO = "alunos.csv"
+
+# Colunas que o DataFrame deve ter
+COLUNAS = ["Matricula", "Nome", "Rua", "Numero", "Bairro", "Cidade", "UF", "Telefone", "Email"]
+
+# -------------------------------------------------------------------
