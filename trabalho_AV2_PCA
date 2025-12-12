@@ -42,3 +42,47 @@ def gerar_matricula(df):
         return int(df["Matricula"].max()) + 1
 
 # -------------------------------------------------------------------
+
+def inserir(df):
+    print("\n=== INSERIR ALUNO ===")
+
+    matricula = gerar_matricula(df)
+    print("Matrícula gerada:", matricula)
+
+    nome = input("Nome: ")
+    rua = input("Rua: ")
+    numero = input("Número: ")
+    bairro = input("Bairro: ")
+    cidade = input("Cidade: ")
+    uf = input("UF: ")
+    telefone = input("Telefone: ")
+    email = input("Email: ")
+
+    aluno = {
+        "Matricula": matricula,
+        "Nome": nome,
+        "Rua": rua,
+        "Numero": numero,
+        "Bairro": bairro,
+        "Cidade": cidade,
+        "UF": uf,
+        "Telefone": telefone,
+        "Email": email
+    }
+
+    
+    df = pd.concat([df, pd.DataFrame([aluno])], ignore_index=True)
+
+    salvar_dados(df)
+    print("Aluno cadastrado com sucesso!\n")
+    return df
+
+# -------------------------------------------------------------------
+
+def mostrar_aluno(aluno):
+    print("\n--- DADOS DO ALUNO ---")
+    for campo in COLUNAS:
+        print(f"{campo}: {aluno[campo]}")
+    print("-----------------------\n")
+
+# -------------------------------------------------------------------
