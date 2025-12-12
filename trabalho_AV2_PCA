@@ -139,3 +139,61 @@ def remover(df, indice):
     return df
 
 # -------------------------------------------------------------------
+
+def pesquisar(df):
+    print("\n=== PESQUISAR ===")
+    print("1 - Pesquisar por Matrícula")
+    print("2 - Pesquisar por Nome")
+    opc = input("Opção: ")
+
+    if opc == "1":
+        mat = input("Digite a matrícula: ")
+        if mat.isdigit():
+            mat = int(mat)
+            resultado = df[df["Matricula"] == mat]
+        else:
+            print("Matrícula inválida.\n")
+            return df
+
+    elif opc == "2":
+        nome = input("Digite o nome: ").lower()
+        
+        resultado = df[df["Nome"].str.lower().str.contains(nome, na=False)]
+    else:
+        print("Opção inválida.\n")
+        return df
+
+    if resultado.empty:
+        print("Aluno não encontrado.\n")
+        return df
+
+    
+    if len(resultado) > 1:
+        print("Foram encontrados vários alunos:")
+        for i, row in resultado.iterrows():
+            print(f"{i} - {row['Nome']} (Matrícula {row['Matricula']})")
+
+        escolha = input("Digite o índice desejado: ")
+
+        if escolha.isdigit() and int(escolha) in resultado.index:
+            indice = int(escolha)
+        else:
+            print("Índice inválido.\n")
+            return df
+    else:
+        indice = resultado.index[0]
+
+    aluno = df.loc[indice]
+    mostrar_aluno(aluno)
+
+    print("1 - Editar")
+    print("2 - Remover")
+    print("0 - Voltar")
+    acao = input("Opção: ")
+
+    if acao == "1":
+        df = editar(df, indice)
+    elif acao == "2":
+        df = remover(df, indice)
+
+    return df
