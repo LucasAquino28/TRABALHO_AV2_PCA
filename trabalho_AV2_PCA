@@ -86,3 +86,56 @@ def mostrar_aluno(aluno):
     print("-----------------------\n")
 
 # -------------------------------------------------------------------
+
+def editar(df, indice):
+    aluno = df.loc[indice]
+    mostrar_aluno(aluno)
+
+    print("Qual campo deseja editar?")
+    print("1 - Nome")
+    print("2 - Rua")
+    print("3 - Número")
+    print("4 - Bairro")
+    print("5 - Cidade")
+    print("6 - UF")
+    print("7 - Telefone")
+    print("8 - Email")
+    print("0 - Cancelar")
+
+    opc = input("Opção: ")
+
+    campos_editaveis = COLUNAS[1:]  
+
+    if opc == "0":
+        print("Edição cancelada.\n")
+        return df
+
+    if opc.isdigit() and 1 <= int(opc) <= 8:
+        campo = campos_editaveis[int(opc) - 1]
+        novo_valor = input(f"Novo valor para {campo}: ")
+        df.at[indice, campo] = novo_valor
+        salvar_dados(df)
+        print("Dados atualizados!\n")
+    else:
+        print("Opção inválida.\n")
+
+    return df
+
+# -------------------------------------------------------------------
+
+def remover(df, indice):
+    aluno = df.loc[indice]
+    mostrar_aluno(aluno)
+
+    confirm = input("Tem certeza que deseja remover? (s/n): ").lower()
+
+    if confirm == "s":
+        df = df.drop(index=indice).reset_index(drop=True)
+        salvar_dados(df)
+        print("Aluno removido!\n")
+    else:
+        print("Remoção cancelada.\n")
+
+    return df
+
+# -------------------------------------------------------------------
