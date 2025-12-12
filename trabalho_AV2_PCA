@@ -197,3 +197,29 @@ def pesquisar(df):
         df = remover(df, indice)
 
     return df
+
+# -------------------------------------------------------------------
+
+def menu():
+    df = carregar_dados()
+
+    while True:
+        print("=== MENU PRINCIPAL ===")
+        print("1 - Inserir")
+        print("2 - Pesquisar")
+        print("3 - Sair")
+
+        opc = input("Opção: ")
+
+        if opc == "1":
+            df = inserir(df)
+        elif opc == "2":
+            df = pesquisar(df)
+        elif opc == "3":
+            print("Saindo do programa...")
+            break
+        else:
+            print("Opção inválida.\n")
+
+
+menu()
